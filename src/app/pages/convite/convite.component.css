@@ -1,0 +1,219 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* ── Wrapper centraliza o cartão no desktop ── */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (min-width: 640px) {
+  .page-wrapper {
+    padding: 52px 20px;
+    align-items: center;
+  }
+}
+
+/* ── Cartão ── */
+.card {
+  position: relative;
+  background: #ffffff;
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .card {
+    box-shadow: 0 12px 64px rgba(0, 0, 0, 0.22);
+  }
+}
+
+/* ── Seção da foto ── */
+.photo-section {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  height: clamp(400px, 100vw, 400px);
+}
+
+.couple-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  -webkit-mask-image: linear-gradient(to bottom, #000 100%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 25%, transparent 88%);
+}
+
+/* ── Florais ── */
+.floral {
+  position: absolute;
+  pointer-events: none;
+}
+
+.floral--tl {
+  top: -40px;
+  left: -85px;
+  width: 70%;
+  z-index: 2;
+}
+
+.floral--tr {
+  top: -8px;
+  right: -8px;
+  width: 46%;
+  transform: scaleX(-1);
+  z-index: 2;
+}
+
+.floral--br {
+  bottom: -8px;
+  right: -8px;
+  width: 42%;
+  transform: rotate(180deg);
+  z-index: 0;
+}
+
+/* ── Conteúdo textual ── */
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 240px 40px 80px;
+}
+
+/* ── Nomes ── */
+.names {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Mea Culpa", cursive;
+  color: rgba(94,102,102);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.name {
+  font-size: clamp(3rem, 14vw, 4.5rem);
+}
+
+.name-e {
+  font-size: clamp(2rem, 9vw, 3rem);
+  margin: -4px 0;
+}
+
+/* ── Subtítulo ── */
+.invite-subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.48rem, 1.7vw, 0.62rem);
+  letter-spacing: 0.38em;
+  color: #4a4a4a;
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+/* ── Data e local ── */
+.event-info {
+  margin-bottom: 28px;
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.deco-line {
+  flex: 1;
+  max-width: 56px;
+  height: 1px;
+  background: #c9a84c;
+}
+
+.date-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.88rem, 3.8vw, 1.15rem);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  color: #2a2a2a;
+  white-space: nowrap;
+}
+
+.venue-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.88rem, 3.6vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #2a2a2a;
+  margin-bottom: 6px;
+}
+
+.address-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.76rem, 2.8vw, 0.9rem);
+  font-weight: 400;
+  color: #777;
+  letter-spacing: 0.04em;
+}
+
+/* ── Citação ── */
+.quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.88rem, 3.4vw, 1.05rem);
+  font-weight: 400;
+  color: #484848;
+  line-height: 1.9;
+  margin-bottom: 44px;
+  padding: 0 4px;
+}
+
+/* ── CTA ── */
+.cta-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.cta-label {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.52rem;
+  letter-spacing: 0.42em;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+.cta-btn {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #2a2a2a;
+  text-decoration: none;
+  border: 1px solid #c9a84c;
+  padding: 14px 36px;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-btn:hover,
+.cta-btn:focus-visible {
+  background-color: #c9a84c;
+  color: #fff;
+  outline: none;
+}

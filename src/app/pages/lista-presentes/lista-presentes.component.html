@@ -1,0 +1,64 @@
+<div class="page-wrapper">
+  <main class="card">
+
+    <!-- Florais decorativos -->
+    <img class="floral floral--tl" src="assets/convite/flores.png" alt="" aria-hidden="true">
+    <img class="floral floral--br" src="assets/convite/flores.png" alt="" aria-hidden="true">
+
+    <!-- Cabeçalho -->
+    <header class="card-header">
+      <p class="header-label">NOSSO CHÁ DE</p>
+      <h1 class="script-heading">Casa Nova</h1>
+    </header>
+
+    <!-- Descrição -->
+    <p class="description">
+      Estamos iniciando uma nova fase e construindo nossa história com muito amor.
+      Se desejar nos presentear, preparamos uma lista de sugestões para facilitar
+      sua escolha.
+    </p>
+
+    <!-- Divisor dourado -->
+    <div class="divider-row">
+      <span class="deco-line"></span>
+      <span class="deco-diamond">◆</span>
+      <span class="deco-line"></span>
+    </div>
+
+    <!-- Lista de presentes -->
+    <section class="gifts-section" aria-labelledby="gifts-title">
+
+      <h2 class="section-title" id="gifts-title">NOSSA LISTA DE PRESENTES</h2>
+
+      <!-- Campo de nome (esboço para futura API) -->
+      <div class="name-form" aria-label="Confirmação de nome">
+        <label class="name-form-label" for="guest-name">
+          INSIRA SEU NOME PARA RESERVAR UM PRESENTE
+        </label>
+        <input
+          id="guest-name"
+          type="text"
+          class="name-input"
+          placeholder="Seu nome completo"
+          disabled
+          aria-disabled="true"
+        >
+        <span class="coming-soon-badge">Em breve</span>
+      </div>
+
+      <!-- Placeholder da lista -->
+      <div class="gifts-placeholder" role="status" aria-live="polite">
+        <span class="placeholder-heart">🤍</span>
+        <p class="placeholder-text">A lista de presentes será divulgada em breve.</p>
+        <p class="placeholder-sub">Estamos preparando tudo com muito carinho.</p>
+      </div>
+
+    </section>
+
+    <!-- Voltar ao convite -->
+    <div class="back-wrapper">
+      <a routerLink="/" class="back-link">← Voltar ao convite</a>
+    </div>
+
+  </main>
+</div>

@@ -1,0 +1,243 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #e8e3db;
+}
+
+/* ── Wrapper ── */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (min-width: 640px) {
+  .page-wrapper {
+    padding: 52px 20px;
+    align-items: center;
+  }
+}
+
+/* ── Cartão ── */
+.card {
+  position: relative;
+  background: #faf8f5;
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+  padding: 64px 44px 88px;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .card {
+    box-shadow: 0 12px 64px rgba(0, 0, 0, 0.22);
+  }
+}
+
+/* ── Florais ── */
+.floral {
+  position: absolute;
+  pointer-events: none;
+}
+
+.floral--tl {
+  top: -8px;
+  left: -8px;
+  width: 46%;
+  z-index: 2;
+}
+
+.floral--br {
+  bottom: -8px;
+  right: -8px;
+  width: 42%;
+  transform: rotate(180deg);
+  z-index: 0;
+}
+
+/* ── Cabeçalho ── */
+.card-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 28px;
+}
+
+.header-label {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.52rem, 1.8vw, 0.65rem);
+  letter-spacing: 0.4em;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.script-heading {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3rem, 14vw, 4.5rem);
+  font-weight: 400;
+  color: #2a2a2a;
+  line-height: 1.2;
+}
+
+/* ── Descrição ── */
+.description {
+  position: relative;
+  z-index: 1;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.82rem, 3.2vw, 0.96rem);
+  font-weight: 400;
+  color: #666;
+  line-height: 1.95;
+  margin-bottom: 36px;
+}
+
+/* ── Divisor dourado ── */
+.divider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+  position: relative;
+  z-index: 1;
+}
+
+.deco-line {
+  flex: 1;
+  height: 1px;
+  background: #c9a84c;
+}
+
+.deco-diamond {
+  font-size: 0.5rem;
+  color: #c9a84c;
+  line-height: 1;
+}
+
+/* ── Seção de presentes ── */
+.gifts-section {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 52px;
+}
+
+.section-title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.58rem, 2vw, 0.72rem);
+  letter-spacing: 0.3em;
+  color: #2a2a2a;
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+/* ── Formulário de nome ── */
+.name-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.name-form-label {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.52rem;
+  letter-spacing: 0.28em;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+.name-input {
+  width: 100%;
+  max-width: 300px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #d4c5a6;
+  padding: 10px 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: #2a2a2a;
+  text-align: center;
+  outline: none;
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.name-input::placeholder {
+  color: #bbb;
+  font-style: italic;
+}
+
+.coming-soon-badge {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  color: #c9a84c;
+  border: 1px solid #c9a84c;
+  padding: 4px 14px;
+  text-transform: uppercase;
+}
+
+/* ── Placeholder da lista ── */
+.gifts-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 16px;
+  border: 1px dashed #ddd5c4;
+}
+
+.placeholder-heart {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.placeholder-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.88rem, 3.4vw, 1rem);
+  color: #777;
+}
+
+.placeholder-sub {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: #bbb;
+}
+
+/* ── Voltar ── */
+.back-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.back-link {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #999;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: #c9a84c;
+  border-color: #c9a84c;
+  outline: none;
+}
