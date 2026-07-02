@@ -1,64 +1,136 @@
 <div class="page-wrapper">
   <main class="card">
 
-    <!-- Florais decorativos -->
-    <img class="floral floral--tl" src="assets/convite/flores.png" alt="" aria-hidden="true">
-    <img class="floral floral--br" src="assets/convite/flores.png" alt="" aria-hidden="true">
+    <!-- Florais -->
+    <img class="floral floral--tl" src="assets/convite/flores3.png" alt="" aria-hidden="true">
+    <img class="floral floral--br" src="assets/convite/flores3.png" alt="" aria-hidden="true">
 
     <!-- Cabeçalho -->
     <header class="card-header">
-      <p class="header-label">NOSSO CHÁ DE</p>
-      <h1 class="script-heading">Casa Nova</h1>
+      <h1 class="page-title">NOSSA LISTA DE<br>PRESENTES</h1>
+      <span class="title-underline"></span>
     </header>
 
-    <!-- Descrição -->
-    <p class="description">
-      Estamos iniciando uma nova fase e construindo nossa história com muito amor.
-      Se desejar nos presentear, preparamos uma lista de sugestões para facilitar
-      sua escolha.
-    </p>
+    <!-- Formulário de reserva -->
+    @if (!submitted()) {
+      <div class="reservation-form">
 
-    <!-- Divisor dourado -->
-    <div class="divider-row">
-      <span class="deco-line"></span>
-      <span class="deco-diamond">◆</span>
-      <span class="deco-line"></span>
-    </div>
+        <!-- Nome -->
+        <div class="field-group">
+          <label class="field-label" for="guest-name">SEU NOME</label>
+          <input
+            id="guest-name"
+            type="text"
+            class="name-input"
+            placeholder="Nome completo"
+            [value]="guestName()"
+            (input)="onNameInput($event)"
+            autocomplete="name"
+          >
+        </div>
 
-    <!-- Lista de presentes -->
-    <section class="gifts-section" aria-labelledby="gifts-title">
+        <!-- Seletor de presente -->
+        <div class="field-group">
+          <p class="field-label">PRESENTE ESCOLHIDO</p>
+          <button
+            class="gift-selector"
+            [class.has-selection]="selectedGift()"
+            (click)="openModal()"
+            type="button"
+            aria-haspopup="dialog"
+          >
+            @if (selectedGift(); as gift) {
+              <span class="selector-gift-name">{{ gift.name }}</span>
+              <span class="selector-hint">toque para alterar</span>
+            } @else {
+              <span class="selector-placeholder">Toque aqui para escolher</span>
+              <span class="selector-arrow">→</span>
+            }
+          </button>
+        </div>
 
-      <h2 class="section-title" id="gifts-title">NOSSA LISTA DE PRESENTES</h2>
+        <!-- Mensagem de erro -->
+        @if (errorMessage()) {
+          <p class="error-msg" role="alert">{{ errorMessage() }}</p>
+        }
 
-      <!-- Campo de nome (esboço para futura API) -->
-      <div class="name-form" aria-label="Confirmação de nome">
-        <label class="name-form-label" for="guest-name">
-          INSIRA SEU NOME PARA RESERVAR UM PRESENTE
-        </label>
-        <input
-          id="guest-name"
-          type="text"
-          class="name-input"
-          placeholder="Seu nome completo"
-          disabled
-          aria-disabled="true"
+        <!-- Botão confirmar -->
+        <button
+          class="confirm-btn"
+          type="button"
+          [disabled]="!canConfirm() || isSubmitting()"
+          [class.loading]="isSubmitting()"
+          (click)="confirm()"
         >
-        <span class="coming-soon-badge">Em breve</span>
+          {{ isSubmitting() ? 'CONFIRMANDO...' : 'CONFIRMAR' }}
+        </button>
+
       </div>
-
-      <!-- Placeholder da lista -->
-      <div class="gifts-placeholder" role="status" aria-live="polite">
-        <span class="placeholder-heart">🤍</span>
-        <p class="placeholder-text">A lista de presentes será divulgada em breve.</p>
-        <p class="placeholder-sub">Estamos preparando tudo com muito carinho.</p>
+    } @else {
+      <!-- Estado de sucesso -->
+      <div class="success-state">
+        <span class="success-heart">🤍</span>
+        <p class="success-title">Reserva confirmada!</p>
+        <p class="success-msg">
+          Obrigado, <strong>{{ guestName() }}</strong>!<br>
+          <em>{{ selectedGift()!.name }}</em> foi reservado com muito carinho.
+        </p>
       </div>
+    }
 
-    </section>
-
-    <!-- Voltar ao convite -->
+    <!-- Voltar -->
     <div class="back-wrapper">
-      <a routerLink="/" class="back-link">← Voltar ao convite</a>
+      <a routerLink="/cha-casa" class="back-link">← Voltar</a>
     </div>
 
   </main>
 </div>
+
+<!-- ── Modal de seleção de presentes ── -->
+@if (isModalOpen()) {
+  <div
+    class="modal-backdrop"
+    (click)="closeModal()"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Selecionar presente"
+  >
+    <div class="modal-sheet" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h2 class="modal-title">ESCOLHA SEU PRESENTE</h2>
+        <button class="modal-close" (click)="closeModal()" type="button" aria-label="Fechar">✕</button>
+      </div>
+
+      <div class="modal-body">
+        @if (isLoading()) {
+          <div class="loading-state">
+            <div class="spinner" aria-label="Carregando"></div>
+            <p class="loading-text">CARREGANDO...</p>
+          </div>
+        } @else {
+          <ul class="gift-list" role="listbox" aria-label="Lista de presentes">
+            @for (gift of gifts(); track gift.id) {
+              <li
+                class="gift-item"
+                [class.reserved]="gift.reserved"
+                [class.selected]="selectedGift()?.id === gift.id"
+                (click)="selectGift(gift)"
+                role="option"
+                [attr.aria-selected]="selectedGift()?.id === gift.id"
+                [attr.aria-disabled]="gift.reserved"
+              >
+                <span class="gift-item-name">{{ gift.name }}</span>
+                @if (gift.reserved) {
+                  <span class="gift-badge reserved-badge">Reservado</span>
+                } @else if (selectedGift()?.id === gift.id) {
+                  <span class="gift-badge selected-badge">✓</span>
+                }
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+  </div>
+}

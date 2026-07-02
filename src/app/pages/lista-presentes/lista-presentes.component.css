@@ -1,7 +1,7 @@
 :host {
   display: block;
   min-height: 100vh;
-  background: #e8e3db;
+  background: #ffffff;
 }
 
 /* ── Wrapper ── */
@@ -22,12 +22,12 @@
 /* ── Cartão ── */
 .card {
   position: relative;
-  background: #faf8f5;
+  background: #ffffff;
   width: 100%;
   max-width: 480px;
   overflow: hidden;
-  padding: 64px 44px 88px;
   text-align: center;
+  padding: 80px 48px 100px;
 }
 
 @media (min-width: 640px) {
@@ -43,17 +43,18 @@
 }
 
 .floral--tl {
-  top: -8px;
-  left: -8px;
-  width: 46%;
+  top: -110px;
+  transform: rotate(-205deg) scaleX(-1);
+  right: -60px;
+  width: 65%;
   z-index: 2;
 }
 
 .floral--br {
-  bottom: -8px;
-  right: -8px;
-  width: 42%;
-  transform: rotate(180deg);
+  bottom: -65px;
+  transform: rotate(-20deg) scaleX(-1);
+  left: -90px;
+  width: 65%;
   z-index: 0;
 }
 
@@ -61,157 +62,167 @@
 .card-header {
   position: relative;
   z-index: 1;
-  margin-bottom: 28px;
-}
-
-.header-label {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 300;
-  font-size: clamp(0.52rem, 1.8vw, 0.65rem);
-  letter-spacing: 0.4em;
-  color: #888;
-  text-transform: uppercase;
-  margin-bottom: 2px;
-}
-
-.script-heading {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(3rem, 14vw, 4.5rem);
-  font-weight: 400;
-  color: #2a2a2a;
-  line-height: 1.2;
-}
-
-/* ── Descrição ── */
-.description {
-  position: relative;
-  z-index: 1;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: clamp(0.82rem, 3.2vw, 0.96rem);
-  font-weight: 400;
-  color: #666;
-  line-height: 1.95;
-  margin-bottom: 36px;
-}
-
-/* ── Divisor dourado ── */
-.divider-row {
+  margin-bottom: 40px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin-bottom: 36px;
-  position: relative;
-  z-index: 1;
 }
 
-.deco-line {
-  flex: 1;
+.page-title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.62rem, 2.2vw, 0.78rem);
+  letter-spacing: 0.32em;
+  color: #2a2a2a;
+  text-transform: uppercase;
+  line-height: 1.9;
+}
+
+.title-underline {
+  display: block;
+  width: 100%;
   height: 1px;
   background: #c9a84c;
 }
 
-.deco-diamond {
-  font-size: 0.5rem;
-  color: #c9a84c;
-  line-height: 1;
-}
-
-/* ── Seção de presentes ── */
-.gifts-section {
+/* ── Formulário ── */
+.reservation-form {
   position: relative;
   z-index: 1;
-  margin-bottom: 52px;
-}
-
-.section-title {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 300;
-  font-size: clamp(0.58rem, 2vw, 0.72rem);
-  letter-spacing: 0.3em;
-  color: #2a2a2a;
-  text-transform: uppercase;
-  margin-bottom: 36px;
-}
-
-/* ── Formulário de nome ── */
-.name-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 40px;
+  gap: 28px;
+  margin-bottom: 44px;
 }
 
-.name-form-label {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 300;
-  font-size: 0.52rem;
-  letter-spacing: 0.28em;
-  color: #aaa;
-  text-transform: uppercase;
-}
-
-.name-input {
-  width: 100%;
-  max-width: 300px;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #d4c5a6;
-  padding: 10px 0;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  color: #2a2a2a;
-  text-align: center;
-  outline: none;
-  cursor: not-allowed;
-  opacity: 0.45;
-}
-
-.name-input::placeholder {
-  color: #bbb;
-  font-style: italic;
-}
-
-.coming-soon-badge {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 300;
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
-  color: #c9a84c;
-  border: 1px solid #c9a84c;
-  padding: 4px 14px;
-  text-transform: uppercase;
-}
-
-/* ── Placeholder da lista ── */
-.gifts-placeholder {
+.field-group {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding: 40px 16px;
-  border: 1px dashed #ddd5c4;
 }
 
-.placeholder-heart {
-  font-size: 1.8rem;
-  line-height: 1;
-}
-
-.placeholder-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: clamp(0.88rem, 3.4vw, 1rem);
-  color: #777;
-}
-
-.placeholder-sub {
+.field-label {
   font-family: 'Raleway', sans-serif;
   font-weight: 300;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
+  font-size: 0.52rem;
+  letter-spacing: 0.32em;
+  color: #aaa;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Nome */
+.name-input {
+  width: 100%;
+  max-width: 320px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #c9a84c;
+  padding: 10px 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  color: #2a2a2a;
+  text-align: center;
+  outline: none;
+}
+.name-input::placeholder { color: #ccc; font-style: italic; }
+.name-input:focus { border-bottom-color: #a07830; }
+
+/* Seletor de presente */
+.gift-selector {
+  width: 100%;
+  max-width: 320px;
+  background: transparent;
+  border: 1px dashed #c9a84c;
+  padding: 18px 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.gift-selector:hover { background: rgba(201, 168, 76, 0.06); }
+.gift-selector.has-selection { border-style: solid; }
+
+.selector-placeholder {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.88rem, 3.2vw, 1rem);
   color: #bbb;
+}
+.selector-arrow {
+  font-size: 0.9rem;
+  color: #c9a84c;
+}
+.selector-gift-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.9rem, 3.4vw, 1.05rem);
+  font-weight: 500;
+  color: #2a2a2a;
+}
+.selector-hint {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: #bbb;
+  text-transform: uppercase;
+}
+
+/* Erro */
+.error-msg {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: #c0392b;
+  margin: -12px 0 0;
+}
+
+/* Confirmar */
+.confirm-btn {
+  width: 100%;
+  max-width: 320px;
+  align-self: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #2a2a2a;
+  border: none;
+  padding: 16px 32px;
+  cursor: pointer;
+  transition: background 0.3s, opacity 0.3s;
+}
+.confirm-btn:hover:not(:disabled) { background: #c9a84c; }
+.confirm-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.confirm-btn.loading { opacity: 0.65; cursor: wait; }
+
+/* ── Sucesso ── */
+.success-state {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 44px;
+}
+.success-heart { font-size: 2.2rem; }
+.success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #2a2a2a;
+}
+.success-msg {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.9;
 }
 
 /* ── Voltar ── */
@@ -221,7 +232,6 @@
   position: relative;
   z-index: 1;
 }
-
 .back-link {
   font-family: 'Raleway', sans-serif;
   font-weight: 300;
@@ -234,10 +244,155 @@
   padding-bottom: 2px;
   transition: color 0.3s, border-color 0.3s;
 }
-
 .back-link:hover,
 .back-link:focus-visible {
   color: #c9a84c;
   border-color: #c9a84c;
   outline: none;
 }
+
+/* ════════════════════════════════════════
+   MODAL
+   ════════════════════════════════════════ */
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes sheetUp {
+  from { transform: translateY(48px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.48);
+  display: flex;
+  align-items: flex-end;
+  z-index: 100;
+  animation: backdropIn 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .modal-backdrop { align-items: center; justify-content: center; }
+}
+
+.modal-sheet {
+  background: #fff;
+  width: 100%;
+  max-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  animation: sheetUp 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .modal-sheet {
+    max-width: 480px;
+    max-height: 65vh;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+  }
+}
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #e8e3db;
+  flex-shrink: 0;
+}
+.modal-title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.65rem;
+  letter-spacing: 0.32em;
+  color: #2a2a2a;
+  text-transform: uppercase;
+}
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #aaa;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: #2a2a2a; }
+
+/* Modal body */
+.modal-body {
+  overflow-y: auto;
+  flex: 1;
+  padding: 8px 0;
+  overscroll-behavior: contain;
+}
+
+/* Loading */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 48px 0;
+}
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #e8e3db;
+  border-top-color: #c9a84c;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  color: #bbb;
+}
+
+/* Lista de presentes */
+.gift-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.gift-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  cursor: pointer;
+  border-bottom: 1px solid #f4f0ea;
+  transition: background 0.15s;
+}
+.gift-item:last-child { border-bottom: none; }
+.gift-item:not(.reserved):hover { background: #faf8f5; }
+.gift-item.selected { background: rgba(201, 168, 76, 0.08); }
+.gift-item.reserved { cursor: not-allowed; opacity: 0.45; }
+
+.gift-item-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: #2a2a2a;
+  text-align: left;
+}
+.gift-item.reserved .gift-item-name { text-decoration: line-through; }
+
+.gift-badge {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+.reserved-badge { color: #999; border: 1px solid #ddd; }
+.selected-badge { color: #c9a84c; border: 1px solid #c9a84c; font-size: 0.75rem; }
+
