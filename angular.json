@@ -65,7 +65,8 @@
               "buildTarget": "casamento:build:production"
             },
             "development": {
-              "buildTarget": "casamento:build:development"
+              "buildTarget": "casamento:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
