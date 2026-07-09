@@ -68,7 +68,7 @@ export class ListaPresentesComponent implements OnInit {
 
     this.isSubmitting.set(true);
     this.submitError.set(null);
-    this.giftService.reserveGift({ nome: name, presenteId: gift.id }).subscribe({
+    this.giftService.reserveGift({ giftName: gift.giftName, personName: name }).subscribe({
       next: () => {
         this.isSubmitting.set(false);
         this.successGiftId.set(gift.id);

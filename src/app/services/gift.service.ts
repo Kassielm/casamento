@@ -11,8 +11,8 @@ export interface Gift {
 }
 
 export interface Reservation {
-  nome: string;
-  presenteId: number;
+  giftName: string;
+  personName: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -25,6 +25,6 @@ export class GiftService {
   }
 
   reserveGift(data: Reservation): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/gifts/${data.presenteId}/reserve`, { nome: data.nome });
+    return this.http.patch<void>(`${this.apiUrl}/gifts/reserve`, data);
   }
 }
