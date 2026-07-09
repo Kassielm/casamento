@@ -1,21 +1,109 @@
 <div class="page-wrapper">
-  <main class="card">
+  <!-- Florais decorativos -->
+  <img class="floral floral--tl" src="assets/convite/flores3.png" alt="" aria-hidden="true">
+  <img class="floral floral--br" src="assets/convite/flores3.png" alt="" aria-hidden="true">
 
-    <!-- Florais -->
-    <img class="floral floral--tl" src="assets/convite/flores3.png" alt="" aria-hidden="true">
-    <img class="floral floral--br" src="assets/convite/flores3.png" alt="" aria-hidden="true">
+  <div class="page-content">
 
     <!-- Cabeçalho -->
-    <header class="card-header">
+    <header class="page-header">
       <h1 class="page-title">NOSSA LISTA DE<br>PRESENTES</h1>
       <span class="title-underline"></span>
     </header>
 
-    <!-- Formulário de reserva -->
-    @if (!submitted()) {
-      <div class="reservation-form">
+    <!-- Loading -->
+    @if (isLoading()) {
+      <div class="loading-state">
+        <div class="spinner" aria-label="Carregando"></div>
+        <p class="loading-text">CARREGANDO...</p>
+      </div>
+    }
 
-        <!-- Nome -->
+    <!-- Erro -->
+    @if (errorMessage()) {
+      <div class="error-state">
+        <p class="error-msg" role="alert">{{ errorMessage() }}</p>
+        <button class="retry-btn" type="button" (click)="loadGifts()">Tentar novamente</button>
+      </div>
+    }
+
+    <!-- Grid de presentes -->
+    @if (!isLoading() && !errorMessage()) {
+      <div class="gifts-grid">
+        @for (gift of gifts(); track gift.id) {
+          <div class="gift-card" [class.reserved]="gift.reserved">
+
+            <div class="card-image-wrapper">
+              <img
+                class="card-image"
+                [src]="getImagePath(gift.imageUrl)"
+                [alt]="gift.giftName"
+                loading="lazy"
+              >
+              @if (gift.reserved) {
+                <div class="reserved-overlay">
+                  <span class="reserved-label">RESERVADO</span>
+                </div>
+              }
+              @if (successGiftId() === gift.id) {
+                <div class="success-overlay">
+                  <span class="success-check">✓</span>
+                </div>
+              }
+            </div>
+
+            <div class="card-body">
+              <p class="card-gift-name">{{ gift.giftName }}</p>
+              <button
+                class="reserve-btn"
+                type="button"
+                [disabled]="gift.reserved"
+                (click)="openReserveModal(gift)"
+              >
+                {{ gift.reserved ? 'RESERVADO' : 'RESERVAR' }}
+              </button>
+            </div>
+
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Voltar -->
+    <div class="back-wrapper">
+      <a routerLink="/cha-casa" class="back-link">← Voltar</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Modal de confirmação de reserva ── -->
+@if (pendingGift()) {
+  <div
+    class="modal-backdrop"
+    (click)="closeModal()"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Confirmar reserva"
+  >
+    <div class="modal-sheet" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h2 class="modal-title">CONFIRMAR RESERVA</h2>
+        <button class="modal-close" (click)="closeModal()" type="button" aria-label="Fechar">✕</button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="modal-gift-preview">
+          <img
+            class="modal-gift-image"
+            [src]="getImagePath(pendingGift()!.imageUrl)"
+            [alt]="pendingGift()!.giftName"
+          >
+          <p class="modal-gift-name">{{ pendingGift()!.giftName }}</p>
+        </div>
+
         <div class="field-group">
           <label class="field-label" for="guest-name">SEU NOME</label>
           <input
@@ -29,32 +117,10 @@
           >
         </div>
 
-        <!-- Seletor de presente -->
-        <div class="field-group">
-          <p class="field-label">PRESENTE ESCOLHIDO</p>
-          <button
-            class="gift-selector"
-            [class.has-selection]="selectedGift()"
-            (click)="openModal()"
-            type="button"
-            aria-haspopup="dialog"
-          >
-            @if (selectedGift(); as gift) {
-              <span class="selector-gift-name">{{ gift.name }}</span>
-              <span class="selector-hint">toque para alterar</span>
-            } @else {
-              <span class="selector-placeholder">Toque aqui para escolher</span>
-              <span class="selector-arrow">→</span>
-            }
-          </button>
-        </div>
-
-        <!-- Mensagem de erro -->
-        @if (errorMessage()) {
-          <p class="error-msg" role="alert">{{ errorMessage() }}</p>
+        @if (submitError()) {
+          <p class="error-msg" role="alert">{{ submitError() }}</p>
         }
 
-        <!-- Botão confirmar -->
         <button
           class="confirm-btn"
           type="button"
@@ -65,71 +131,6 @@
           {{ isSubmitting() ? 'CONFIRMANDO...' : 'CONFIRMAR' }}
         </button>
 
-      </div>
-    } @else {
-      <!-- Estado de sucesso -->
-      <div class="success-state">
-        <span class="success-heart">🤍</span>
-        <p class="success-title">Reserva confirmada!</p>
-        <p class="success-msg">
-          Obrigado, <strong>{{ guestName() }}</strong>!<br>
-          <em>{{ selectedGift()!.name }}</em> foi reservado com muito carinho.
-        </p>
-      </div>
-    }
-
-    <!-- Voltar -->
-    <div class="back-wrapper">
-      <a routerLink="/cha-casa" class="back-link">← Voltar</a>
-    </div>
-
-  </main>
-</div>
-
-<!-- ── Modal de seleção de presentes ── -->
-@if (isModalOpen()) {
-  <div
-    class="modal-backdrop"
-    (click)="closeModal()"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Selecionar presente"
-  >
-    <div class="modal-sheet" (click)="$event.stopPropagation()">
-
-      <div class="modal-header">
-        <h2 class="modal-title">ESCOLHA SEU PRESENTE</h2>
-        <button class="modal-close" (click)="closeModal()" type="button" aria-label="Fechar">✕</button>
-      </div>
-
-      <div class="modal-body">
-        @if (isLoading()) {
-          <div class="loading-state">
-            <div class="spinner" aria-label="Carregando"></div>
-            <p class="loading-text">CARREGANDO...</p>
-          </div>
-        } @else {
-          <ul class="gift-list" role="listbox" aria-label="Lista de presentes">
-            @for (gift of gifts(); track gift.id) {
-              <li
-                class="gift-item"
-                [class.reserved]="gift.reserved"
-                [class.selected]="selectedGift()?.id === gift.id"
-                (click)="selectGift(gift)"
-                role="option"
-                [attr.aria-selected]="selectedGift()?.id === gift.id"
-                [attr.aria-disabled]="gift.reserved"
-              >
-                <span class="gift-item-name">{{ gift.name }}</span>
-                @if (gift.reserved) {
-                  <span class="gift-badge reserved-badge">Reservado</span>
-                } @else if (selectedGift()?.id === gift.id) {
-                  <span class="gift-badge selected-badge">✓</span>
-                }
-              </li>
-            }
-          </ul>
-        }
       </div>
     </div>
   </div>

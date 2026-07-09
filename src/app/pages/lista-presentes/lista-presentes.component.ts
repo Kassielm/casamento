@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject } from '@angular/core';
+import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { GiftService, Gift } from '../../services/gift.service';
 
@@ -8,28 +8,28 @@ import { GiftService, Gift } from '../../services/gift.service';
   templateUrl: './lista-presentes.component.html',
   styleUrl: './lista-presentes.component.css',
 })
-export class ListaPresentesComponent {
+export class ListaPresentesComponent implements OnInit {
   private giftService = inject(GiftService);
 
-  guestName    = signal('');
-  selectedGift = signal<Gift | null>(null);
-  isModalOpen  = signal(false);
-  gifts        = signal<Gift[]>([]);
-  isLoading    = signal(false);
-  isSubmitting = signal(false);
-  submitted    = signal(false);
-  errorMessage = signal<string | null>(null);
+  gifts         = signal<Gift[]>([]);
+  isLoading     = signal(true);
+  errorMessage  = signal<string | null>(null);
+
+  pendingGift   = signal<Gift | null>(null);
+  guestName     = signal('');
+  isSubmitting  = signal(false);
+  submitError   = signal<string | null>(null);
+  successGiftId = signal<number | null>(null);
 
   canConfirm = computed(
-    () => this.guestName().trim().length > 0 && this.selectedGift() !== null
+    () => this.guestName().trim().length > 0 && this.pendingGift() !== null
   );
 
-  onNameInput(event: Event): void {
-    this.guestName.set((event.target as HTMLInputElement).value);
+  ngOnInit(): void {
+    this.loadGifts();
   }
 
-  openModal(): void {
-    this.isModalOpen.set(true);
+  loadGifts(): void {
     this.isLoading.set(true);
     this.errorMessage.set(null);
     this.giftService.getGifts().subscribe({
@@ -41,28 +41,43 @@ export class ListaPresentesComponent {
     });
   }
 
-  selectGift(gift: Gift): void {
+  getImagePath(imageUrl: string): string {
+    return `assets/presentes/${imageUrl}.jpeg`;
+  }
+
+  openReserveModal(gift: Gift): void {
     if (gift.reserved) return;
-    this.selectedGift.set(gift);
-    this.isModalOpen.set(false);
+    this.pendingGift.set(gift);
+    this.guestName.set('');
+    this.submitError.set(null);
   }
 
   closeModal(): void {
-    this.isModalOpen.set(false);
+    this.pendingGift.set(null);
+    this.submitError.set(null);
+  }
+
+  onNameInput(event: Event): void {
+    this.guestName.set((event.target as HTMLInputElement).value);
   }
 
   confirm(): void {
-    const gift = this.selectedGift();
+    const gift = this.pendingGift();
     const name = this.guestName().trim();
     if (!name || !gift || this.isSubmitting()) return;
 
     this.isSubmitting.set(true);
-    this.errorMessage.set(null);
+    this.submitError.set(null);
     this.giftService.reserveGift({ nome: name, presenteId: gift.id }).subscribe({
-      next: () => { this.isSubmitting.set(false); this.submitted.set(true); },
+      next: () => {
+        this.isSubmitting.set(false);
+        this.successGiftId.set(gift.id);
+        this.gifts.update(gs => gs.map(g => g.id === gift.id ? { ...g, reserved: true } : g));
+        this.pendingGift.set(null);
+      },
       error: () => {
         this.isSubmitting.set(false);
-        this.errorMessage.set('Erro ao confirmar reserva. Tente novamente.');
+        this.submitError.set('Erro ao confirmar reserva. Tente novamente.');
       },
     });
   }
