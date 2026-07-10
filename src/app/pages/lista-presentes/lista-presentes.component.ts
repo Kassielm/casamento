@@ -19,7 +19,8 @@ export class ListaPresentesComponent implements OnInit {
   guestName     = signal('');
   isSubmitting  = signal(false);
   submitError   = signal<string | null>(null);
-  successGiftId = signal<number | null>(null);
+  successGiftId    = signal<number | null>(null);
+  reservationDone  = signal<{ giftName: string; personName: string } | null>(null);
 
   canConfirm = computed(
     () => this.guestName().trim().length > 0 && this.pendingGift() !== null
@@ -57,6 +58,11 @@ export class ListaPresentesComponent implements OnInit {
     this.submitError.set(null);
   }
 
+  closeSuccessModal(): void {
+    this.reservationDone.set(null);
+    this.loadGifts();
+  }
+
   onNameInput(event: Event): void {
     this.guestName.set((event.target as HTMLInputElement).value);
   }
@@ -74,6 +80,7 @@ export class ListaPresentesComponent implements OnInit {
         this.successGiftId.set(gift.id);
         this.gifts.update(gs => gs.map(g => g.id === gift.id ? { ...g, reserved: true } : g));
         this.pendingGift.set(null);
+        this.reservationDone.set({ giftName: gift.giftName, personName: name });
       },
       error: () => {
         this.isSubmitting.set(false);

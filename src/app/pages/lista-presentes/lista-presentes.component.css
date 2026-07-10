@@ -442,3 +442,50 @@
 .confirm-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 .confirm-btn.loading { opacity: 0.65; cursor: wait; }
 
+/* ── Modal de sucesso ── */
+.success-sheet {
+  border-radius: 6px 6px 0 0;
+}
+@media (min-width: 640px) {
+  .success-sheet { border-radius: 4px; }
+}
+
+.success-body {
+  padding: 40px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+.success-heart { font-size: 2.4rem; }
+.success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #2a2a2a;
+  margin: 0;
+}
+.success-msg {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  color: #555;
+  line-height: 1.8;
+  margin: 0;
+}
+.success-close-btn {
+  margin-top: 8px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #2a2a2a;
+  border: none;
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.success-close-btn:hover { background: #c9a84c; }
+

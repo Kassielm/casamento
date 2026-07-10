@@ -135,3 +135,28 @@
     </div>
   </div>
 }
+
+<!-- ── Modal de sucesso ── -->
+@if (reservationDone()) {
+  <div
+    class="modal-backdrop"
+    (click)="closeSuccessModal()"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Reserva confirmada"
+  >
+    <div class="modal-sheet success-sheet" (click)="$event.stopPropagation()">
+      <div class="success-body">
+        <span class="success-heart">🤍</span>
+        <h2 class="success-title">Reserva confirmada!</h2>
+        <p class="success-msg">
+          Obrigado, <strong>{{ reservationDone()!.personName }}</strong>!<br>
+          <em>{{ reservationDone()!.giftName }}</em> foi reservado com muito carinho.
+        </p>
+        <button class="success-close-btn" type="button" (click)="closeSuccessModal()">
+          FECHAR
+        </button>
+      </div>
+    </div>
+  </div>
+}
