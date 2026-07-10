@@ -21,10 +21,18 @@ export class GiftService {
   private readonly apiUrl = '/api';
 
   getGifts(): Observable<Gift[]> {
-    return this.http.get<Gift[]>(`${this.apiUrl}/gifts`);
+    return this.http.get<Gift[]>(`${this.apiUrl}/gifts/not-reserved`);
   }
 
   reserveGift(data: Reservation): Observable<void> {
     return this.http.patch<void>(`${this.apiUrl}/gifts/reserve`, data);
+  }
+
+  getReservedGifts(): Observable<Gift[]> {
+    return this.http.get<Gift[]>(`${this.apiUrl}/gifts/reserved`);
+  }
+
+  unreserveGift(id: number): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/gifts/${id}/unreserve`, {});
   }
 }

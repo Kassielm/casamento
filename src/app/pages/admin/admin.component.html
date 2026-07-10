@@ -1,0 +1,67 @@
+<div class="page-wrapper">
+
+  <header class="page-header">
+    <h1 class="page-title">RESERVAS</h1>
+    <span class="title-underline"></span>
+  </header>
+
+  <!-- Loading -->
+  @if (isLoading()) {
+    <div class="loading-state">
+      <div class="spinner" aria-label="Carregando"></div>
+      <p class="loading-text">CARREGANDO...</p>
+    </div>
+  }
+
+  <!-- Erro -->
+  @if (errorMessage()) {
+    <div class="error-state">
+      <p class="error-msg" role="alert">{{ errorMessage() }}</p>
+      <button class="retry-btn" type="button" (click)="loadReserved()">Tentar novamente</button>
+    </div>
+  }
+
+  <!-- Vazio -->
+  @if (!isLoading() && !errorMessage() && gifts().length === 0) {
+    <div class="empty-state">
+      <p class="empty-msg">Nenhuma reserva registrada ainda.</p>
+    </div>
+  }
+
+  <!-- Lista de reservas -->
+  @if (!isLoading() && gifts().length > 0) {
+    <div class="gifts-grid">
+      @for (gift of gifts(); track gift.id) {
+        <div class="gift-card" [class.removing]="removingId() === gift.id">
+
+          <div class="card-image-wrapper">
+            <img
+              class="card-image"
+              [src]="getImagePath(gift.imageUrl)"
+              [alt]="gift.giftName"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="card-body">
+            <p class="card-gift-name">{{ gift.giftName }}</p>
+            <p class="card-reserved-by">
+              <span class="reserved-label">Reservado por</span>
+              <strong class="reserved-name">{{ gift.name }}</strong>
+            </p>
+            <button
+              class="unreserve-btn"
+              type="button"
+              [disabled]="removingId() !== null"
+              (click)="unreserve(gift)"
+            >
+              {{ removingId() === gift.id ? 'REMOVENDO...' : 'REMOVER RESERVA' }}
+            </button>
+          </div>
+
+        </div>
+      }
+    </div>
+  }
+
+</div>

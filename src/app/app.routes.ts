@@ -18,5 +18,10 @@ export const routes: Routes = [
         m => m.ListaPresentesComponent
       ),
   },
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./pages/admin/admin.component').then(m => m.AdminComponent),
+  },
   { path: '**', redirectTo: '' },
 ];
